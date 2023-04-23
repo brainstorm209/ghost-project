@@ -1,0 +1,32 @@
+<div class="member-profile flex">
+  {{#if @member.avatar_image}}
+    <figure class="member-profile__media">
+      <img src="{{@member.avatar_image}}" alt="{{@member.name}}">
+      {{> icon name="user" size="2x"}}
+    </figure>
+  {{/if}}
+  <div class="member-profile__content flex-1">
+    <div class="member-profile__title fw-600 text-12 m-b-xs">
+      {{t "Welcome back"}}{{#if @member.name}}, {{@member.name}}{{/if}}!
+    </div>
+
+    <div class="member-profile__description text-acc">
+      {{#if @member.paid}}
+        {{!-- Info for paying members --}}
+        {{#if cancel_at_period_end}}
+          <span class="color-error fw-600">{{t "Your subscription will expire on"}} {{date current_period_end format="DD MMM YYYY"}}.</span>
+          {{t "If you change your mind in the meantime you can turn auto-renew back on to continue your subscription."}}
+        {{else}}
+          {{t "Currently, you have an active account."}}
+          {{t "You're all set, but if you need any help, get in touch with us and we'd be happy to help."}}
+        {{/if}}
+      {{else if @member}}
+        {{!-- Info for regular members --}}
+        <p class="m-b">
+          {{t "Currently, you are subscribed to free updates."}} 
+          <span class="is-upgrade">{{t "Unlock full access to see the entire library of members-only content & updates by subscribing to a paid plan."}}</span>
+        </p>
+      {{/if}}  
+    </div>
+  </div>
+</div>

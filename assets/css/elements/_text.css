@@ -1,0 +1,121 @@
+/* Paragraph */
+p {
+  font-size: var(--font-size-base);
+  line-height: calc(0.1 + var(--line-height-base));
+  margin: 0 0 var(--gap-lg);
+}
+
+/* Links */
+a {
+  color: var(--color-link);
+  color: inherit;
+  text-decoration: none;
+  box-shadow: none;
+
+  @mixin focus-visible;
+}
+
+/* Quote */
+blockquote {
+  margin: 0;
+  margin-bottom: var(--gap-lg);
+  font-family: var(--font-body);
+  font-style: italic;
+  font-size: calc(1.1 * var(--font-size-base));
+  line-height: var(--line-height-base);
+  background-color: var(--color-bg);
+  border-left: 3px solid var(--color-brand);
+  border-top-right-radius: var(--global-radius);
+  border-bottom-right-radius: var(--global-radius);
+  padding: 0.5em 1.5em;
+  position: relative;
+  width: 100%;
+
+  &+ figcaption cite {
+    display: block;
+    font-size: inherit;
+    text-align: right;
+    font-style: italic;
+  }
+
+  cite { font-weight: var(--font-weight-bold); }
+
+  p {
+    margin: 0;
+  }
+}
+
+/* Misc */
+em, i, .italic {
+	font-style: italic;
+}
+
+strong, b, .bold {
+  font-weight: var(--font-weight-bold);
+}
+
+small, .small {
+  font-size: 80%;
+}
+
+details {
+  border: var(--border-width) solid var(--color-border);
+  border-radius: var(--global-radius);
+  margin-bottom: var(--gap-lg);
+
+  @media (--mq-md) {
+    padding: var(--gap-sm);
+  }
+
+  @mixin attention {
+    summary:after {
+      color: var(--color-text-acc);
+    }
+  }
+
+  & > * {
+    margin: var(--gap);
+    margin-top: 0;
+    padding-top: 1em;
+    color: var(--color-text-acc);
+  }
+
+  summary {
+    list-style: none;
+    font-size: 1rem;
+    font-weight: var(--font-weight-semi-bold);
+    color: var(--color-text-acc);
+    position: relative;
+    margin: 0;
+    padding: var(--gap); 
+    padding-right: var(--gap-lg);   
+
+    @mixin attention {
+      cursor: pointer;
+      outline: none;
+    }
+
+    &::marker {
+    /* &::-webkit-details-marker { */
+      display: none;
+    }
+
+    &:after {
+      position: absolute;
+      content: '+';
+      right: var(--gap);
+      color: var(--color-grey);
+    }
+  }
+
+  & > :nth-child(2) {
+    border-top: var(--border-width) solid var(--color-border);
+  }
+
+  &[open] {
+    summary { color: var(--color-brand); }
+    summary:after {
+      content: '-';
+    }
+  }
+}

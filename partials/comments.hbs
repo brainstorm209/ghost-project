@@ -1,0 +1,12 @@
+{{!-- Comments --}}
+{{#if comments}}
+  <div class="post-comments radius-double p-lg p-b-0 flex-1 self-align-start" id="comments">
+    <div class="content-width">
+      {{comments 
+        title=""
+        count=false
+        mode=auto
+      }}
+    </div>
+  </div>
+{{/if}}

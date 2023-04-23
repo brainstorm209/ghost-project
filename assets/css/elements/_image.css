@@ -1,0 +1,14 @@
+/* Image */
+img {
+  max-width: 100%;
+  margin: 0;
+  height: auto;
+}
+
+picture { border-radius: inherit; }
+
+@mixin darktheme {
+  img:not(.header__logo) {
+    filter: brightness(.8) contrast(1.2);
+  }
+}

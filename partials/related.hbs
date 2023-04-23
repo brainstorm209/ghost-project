@@ -1,0 +1,18 @@
+{{!-- Related Posts --}}
+{{#if tags}}
+  {{#get "posts" include="tags,authors,tiers" limit="5" filter="id:-{{id}}+tag:[{{primary_tag.slug}}]" as |related|}}
+    {{#if posts}}
+      <div class="related-posts radius-double p-lg flex-1 self-align-start">
+        <span class="section-title sm m-b uppercase">{{t "Read next"}}</span>
+        <div class="post-list m-b-sm">
+          {{#foreach related}}
+            <a class="post-list-item" href="{{url}}">
+              <h3 class="post-list-item__title">{{title}}</h3>
+              {{> icon name="chevron-right"}}
+            </a>
+          {{/foreach}}
+        </div>
+      </div>
+    {{/if}}
+  {{/get}}
+{{/if}}

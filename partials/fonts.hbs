@@ -1,0 +1,65 @@
+{{!-- Typography --}}
+{{#if @custom.font_family}}
+  {{#match @custom.font_family "!=" "System font"}}
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  {{/match}}
+
+  {{!-- System font --}}
+  {{#match @custom.font_family "System font"}}
+    {{!-- It's the default settings, browser fonts are used --}}
+    {{!-- -apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji"; --}}
+  {{/match}}
+
+  {{!-- Figtree --}}
+  {{#match @custom.font_family "Figtree"}}
+    <link rel="preload stylesheet" href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&display=swap" 
+          as="style" onload="this.onload=null;this.rel='stylesheet'" crossorigin>
+    <style>body { --font-body: 'Figtree', sans-serif; --font-headings: 'Figtree', sans-serif; }</style>
+  {{/match}}
+
+  {{!-- Space Grotesk --}}
+  {{#match @custom.font_family "Space Grotesk"}}
+    <link rel="preload stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" 
+          as="style" onload="this.onload=null;this.rel='stylesheet'" crossorigin>
+    <style>body { --font-body: 'Space Grotesk', sans-serif; --font-headings: 'Space Grotesk', sans-serif; }</style>
+  {{/match}}
+
+  {{!-- Outfit --}}
+  {{#match @custom.font_family "Outfit"}}
+    <link rel="preload stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&display=swap" 
+          as="style" onload="this.onload=null;this.rel='stylesheet'" crossorigin>
+    <style>body { --font-body: 'Outfit', sans-serif; --font-headings: 'Outfit', sans-serif; }</style>
+  {{/match}}
+
+  {{!-- Inter --}}
+  {{#match @custom.font_family "Inter"}}
+    <link rel="preload stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" 
+          as="style" onload="this.onload=null;this.rel='stylesheet'" crossorigin>    
+    <style>body { --font-body: 'Inter', sans-serif; --font-headings: 'Inter', sans-serif;}</style>
+  {{/match}}
+
+  {{!-- Kreon --}}
+  {{#match @custom.font_family "Kreon"}}
+    <link rel="preload stylesheet" href="https://fonts.googleapis.com/css2?family=Kreon:wght@400;500;600;700&display=swap" 
+          as="style" onload="this.onload=null;this.rel='stylesheet'" crossorigin>
+    <style>body { --font-body: 'Kreon', sans-serif; --font-headings: 'Kreon', sans-serif; }</style>
+  {{/match}}
+
+  {{!-- Quicksand --}}
+  {{#match @custom.font_family "Quicksand"}}
+    <link rel="preload stylesheet" href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&display=swap" 
+          as="style" onload="this.onload=null;this.rel='stylesheet'" crossorigin>
+    <style>body { --font-body: 'Quicksand', sans-serif; --font-headings: 'Quicksand', sans-serif; }</style>
+  {{/match}}
+
+  {{!-- Azeret Mono --}}
+  {{#match @custom.font_family "Azeret Mono"}}
+    <link rel="preload stylesheet" href="https://fonts.googleapis.com/css2?family=Azeret+Mono:wght@400;500;600;700&display=swap" 
+          as="style" onload="this.onload=null;this.rel='stylesheet'" crossorigin>
+    <style> 
+      body { --font-body: 'Azeret Mono', monospace; --font-headings: 'Azeret Mono', monospace; } 
+      body h1, body h2, body h3 { font-weight: var(--font-weight-extra-bold); }
+    </style>
+  {{/match}}
+{{/if}}

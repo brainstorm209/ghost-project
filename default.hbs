@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="{{@site.locale}}" data-color-scheme="{{@custom.color_scheme}}">
+  <head>
+    {{!-- Document Settings --}}
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    {{!-- Page Meta --}}
+    <title>{{meta_title}}</title>
+
+    {{!-- Mobile Meta --}}
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    {{!-- Theme color --}}
+    <meta name="theme-color" content="{{@site.accent_color}}">
+
+    {{!-- Color scheme support --}}
+    {{!-- <meta name="color-scheme" content="dark light"> --}}
+
+    {{!-- Preloading --}}
+    <link rel="preload" href="{{asset 'dist/app.min.js'}}" as="script">
+    <link rel="preload" href="{{asset 'dist/app.min.css'}}" as="style">
+
+    {{!-- Fonts --}}
+    {{> fonts}}
+
+    {{!-- Main theme scripts --}}
+    <script async defer src="{{asset 'dist/app.min.js'}}"></script>
+
+    {{!-- Styles --}}
+    <link rel="stylesheet" type="text/css" href="{{asset 'dist/app.min.css'}}">
+
+    {{!-- Theme Settings --}}
+    {{> theme-settings}}
+    
+    {{!-- Syntax highlighting for posts and pages --}} 
+    {{!-- Can be activated using #syntax-highlight internal tag --}}
+    {{#post}}{{> syntax-highlight}}{{/post}}
+    {{#page}}{{> syntax-highlight}}{{/page}} 
+
+    {{!-- Ghost outputs important style and meta data with this tag --}}
+    {{ghost_head}}
+  </head>
+  <body class="{{body_class}}" data-hero-image="{{#is "home"}}{{@custom.hero_image_style}}{{else}}{{{block "bg-image"}}}{{/is}}">
+    {{!-- Progress Bar for posts --}}
+    {{#is "post"}}<div class="progress-bar"></div>{{/is}}
+    
+    {{^is "signin, signup"}}
+      {{!-- Site header --}}
+      {{> header}}
+
+      {{!-- Menu --}}
+      {{> menu}}
+    {{/is}}
+
+    <main class="main{{#is "signin, signup"}} flex{{/is}}">
+      {{!-- All the main content gets inserted here, index.hbs, post.hbs, etc --}}
+      {{{body}}}
+    </main>
+
+    {{!-- Display everywhere, except signin & signup pages --}}
+    {{^is "signin, signup"}}
+      {{!-- CTA --}}
+      {{> cta}}
+      
+      {{!-- The footer at the very bottom --}}
+      {{> footer}}
+    {{/is}}
+
+    {{!-- Notifications --}}
+    {{> notifications}}
+      
+    {{!-- Block for TOC --}}
+    {{{block "toc"}}}
+
+    {{!-- Block for Search library & script --}}
+    {{{block "search"}}}
+
+    {{!-- Block for scripts --}}
+    {{{block "scripts"}}}
+
+    {{!-- Ghost outputs important scripts and data with this tag --}}
+    {{ghost_foot}}
+  </body>
+</html>

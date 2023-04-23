@@ -1,0 +1,50 @@
+{{!-- CTA section --}}
+{{#if @site.members_enabled}}
+  {{#unless @site.members_invite_only}}
+    <section class="container wrapper section cta m-b-0{{#is "home"}} is-home{{/is}}{{#is "post"}} is-post{{/is}}" >
+      <div class="cta__inner radius-double is-rel w-100 p-t-lg p-b-lg{{#if @site.cover_image}} has-img{{/if}}">
+        <div class="cta__content flex flex-col is-rel z-index-1">
+          <h2 class="cta__title">{{#if @custom.cta_headline}}{{{@custom.cta_headline}}}{{else}}{{@site.title}}{{/if}}</h2>
+          <p id="cta-input-label" class="cta__description opacity-075">{{#if @custom.cta_description}}{{@custom.cta_description}}{{else}}{{@site.description}}{{/if}}</p>
+          
+          {{!-- CTA button --}}
+          {{#match @custom.cta_button_link "subscribe-form"}}
+            {{!-- Subscribe form --}}
+            {{#unless @member}}
+              {{> subscribe-form 
+                form_type="signup"
+                form_style="inline-joined"
+                form_class=""
+                input_class=""
+                input_label="cta-input-label"
+                button_text=@custom.cta_button_text
+                button_class="btn--brand btn--gradient uppercase"
+              }}
+            {{/unless}}
+          {{else}}
+            {{#if @custom.cta_button_link}}
+              <a href="{{@custom.cta_button_link}}" class="btn btn--brand">
+                {{@custom.cta_button_text}}
+              </a>
+            {{/if}}
+          {{/match}}
+        </div>
+        
+        {{!-- The site cover image --}}
+        {{#if @site.cover_image}}
+          <figure class="cta__media">
+            {{> image
+              image_type="site"
+              image_class="lazyload cta__img"
+              image_url=@site.cover_image
+              size_s=true
+              size_m=true
+              size_l=true
+              size_xl=true
+            }}
+          </figure>
+        {{/if}}
+      </div>
+    </section>
+  {{/unless}}
+{{/if}}

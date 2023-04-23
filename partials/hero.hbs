@@ -1,0 +1,55 @@
+<div class="hero is-home flex flex-col{{#if class}} {{class}}{{/if}}" data-cover-image="{{#if @site.cover_image}}true{{else}}false{{/if}}"
+  data-image-style="{{#if @custom.hero_image_style}}{{@custom.hero_image_style}}{{else}}{{/if}}">
+
+  {{!-- Hero Content --}}
+  <div class="hero__content flex flex-col">
+    <h1 class="hero__title">{{#if @custom.cta_headline}}{{{@custom.cta_headline}}}{{else}}{{@site.title}}{{/if}}</h1>
+    <div id="hero-input-label" class="hero__description">
+      {{#if @custom.cta_description}}{{@custom.cta_description}}{{else}}{{@site.description}}{{/if}}
+    </div>
+    
+    {{!-- CTA button --}}
+    {{#match @custom.cta_button_link "subscribe-form"}}
+      {{!-- Subscribe form --}}
+      {{#if @site.members_enabled}}
+        {{#unless @site.members_invite_only}}
+          {{#unless @member}}
+            {{> subscribe-form 
+              form_type="signup"
+              form_style="inline-joined"
+              form_class=""
+              input_class=""
+              input_label="cta-input-label"
+              button_text=@custom.cta_button_text
+              button_class="btn--brand btn--gradient uppercase"
+            }}
+          {{/unless}}
+        {{/unless}}
+      {{/if}}
+    {{else}}
+      {{#if @custom.cta_button_link}}
+        <a href="{{@custom.cta_button_link}}" class="btn btn--brand">
+          {{@custom.cta_button_text}}
+        </a>
+      {{/if}}
+    {{/match}}
+  </div>
+
+  {{!-- Regular user content, the site cover image is used --}}
+  {{#if @site.cover_image}}
+    <figure class="hero__media">
+      {{> image
+        image_type="site"
+        image_class="lazyload hero__img"
+        image_url=@site.cover_image
+        size_s=true
+        size_m=true
+        size_l=true
+        size_xl=true
+      }}
+      {{#match @custom.hero_image_style "background-full"}}
+        <svg viewBox="0 0 1600 200" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1"><path d="M0 150L133.3 156.5C266.7 163 533.3 176 800 176C1066.7 176 1333.3 163 1466.7 156.5L1600 150L1600 201L1466.7 201C1333.3 201 1066.7 201 800 201C533.3 201 266.7 201 133.3 201L0 201Z" fill="var(--color-bg)" stroke-linecap="round" stroke-linejoin="miter"></path></svg>
+      {{/match}}
+    </figure>
+  {{/if}}
+</div>

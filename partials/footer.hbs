@@ -1,0 +1,92 @@
+{{!-- Site footer --}}
+<footer class="footer">
+  <div class="container wrapper">
+    <div class="row m-b">
+      <div class="col-xs-12 col-md-4">
+        {{!-- Site title / logo --}}
+        <div class="footer__brand flex items-center">
+          {{#if @site.logo}}
+            {{> image
+              image_type="site"
+              image_class="footer__logo m-r lazyload"
+              image_url=@site.logo
+              size_s=true
+            }}
+          {{else}}
+            <span class="footer__title">{{@site.title}}</span>
+          {{/if}}
+        </div>
+
+        {{!-- Site description --}}
+        <div class="footer__description" id="footer-input-label">
+          {{@site.description}}
+        </div>
+
+        {{!-- Footer subscribe --}}
+        {{#if @site.members_enabled}}
+          {{#unless @site.members_invite_only}}
+            {{#unless member}}
+              {{> subscribe-form
+                form_style="inline-joined"
+                form_class="radius-rounded m-b"
+                input_class="w-100 radius-rounded"
+                input_label="footer-input-label"
+                button_class="btn--primary radius-rounded"
+              }}
+            {{/unless}}
+          {{/unless}}
+        {{/if}}
+      </div>
+
+      <div class="col-xs-12 col-md-4 m-b footer-nav">
+        {{!-- Navigation --}}
+        <span class="fw-700 m-b-sm display-block text-acc">{{t "Navigation"}}</span>
+        <div class="grid col-2">
+          {{navigation}}
+
+          {{!-- Secondary navigation --}}
+          {{#if @site.secondary_navigation}}
+            {{navigation type="secondary"}}
+          {{/if}}
+        </div>
+      </div>
+
+      <div class="col-xs-12 col-sm-6 col-md-2 m-b">
+        {{!-- Contact and newsletter --}}
+        {{#if @custom.resources_filter_slugs}}
+          {{#get "tags" filter="slug:[{{@custom.resources_filter_slugs}}]"}}
+            {{#if tags}}
+              <span class="fw-700 m-b-sm display-block text-acc">{{t "Resources"}}</span>
+              <ul class="nav">
+                {{#foreach tags}}
+                  <li><a href="{{url}}">{{name}}</a></li>
+                {{/foreach}}
+              </ul>
+            {{/if}}
+          {{/get}}
+        {{/if}}
+      </div>
+
+      <div class="col-xs-12 col-sm-6 col-md-2 m-b">
+        <span class="fw-700 m-b-sm display-block text-acc">{{t "Social"}}</span>
+        {{!-- Social links --}}
+        <div class="social-links flex flex-col">
+          {{> social-links}}
+        </div>
+      </div>
+    </div>
+
+    {{!-- Footer copy & theme --}}
+    <div class="footer__bottom">
+      {{!-- Footer Copy --}}
+      <div class="footer__copy">
+        <span>&copy;{{date format="YYYY"}}&nbsp;{{#link href=@site.url}}{{@site.title}}{{/link}}.</span>
+        <span>{{t "Published with"}}&nbsp;{{#link href="https://ghost.org"}}Ghost{{/link}}&nbsp;&&nbsp;{{#link href="https://bironthemes.com/themes/rinne-ghost/"}}Rinne{{/link}}.</span>
+      </div>
+
+      {{!-- Color scheme dropdown --}}
+      {{> color-scheme-dropdown}}
+    </div>
+
+  </div>
+</footer>

@@ -1,0 +1,87 @@
+.footer {
+  color: var(--color-text-acc);  
+  position: relative;
+  margin-top: var(--gap-sm);
+  padding: 1.5em 0;
+
+  @media (--mq-md) { font-size: 1.1rem; }
+
+  .grid.col-2 {
+    grid-template-columns: repeat(2,1fr);
+  }
+
+  &-nav {
+    @media (--mq-md) {
+      padding-left: 2em;
+    }
+  }
+
+  &__logo { 
+    height: 48px;
+    object-fit: contain;
+    max-width: 240px;
+    margin-bottom: var(--gap-sm);
+    display: block;
+  }
+
+  &__title {
+    display: block;
+    font-size: 1.4rem;
+    font-weight: var(--font-weight-bold);
+    margin-bottom: 0.25em;
+  }
+
+  &__description {
+    opacity: 0.8;
+    margin-bottom: 0.75rem;
+  }
+
+  .nav {
+    display: flex;
+    flex-direction: column;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    color: var(--color-text-acc);
+    margin-bottom: 0;
+
+    .is-mainitem i { display: none; }
+
+    li { margin-right: var(--gap); margin-bottom: var(--gap-xs); }
+
+    a {
+      border-radius: var(--global-radius);
+      display: inline-block;
+      line-height: 1.2;
+    }
+  }
+
+  .nav, .social-links {
+    opacity: 0.8;
+  }
+
+  a { @mixin attention { color: var(--color-brand); } }
+
+  &__bottom { 
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;    
+    border-top: 1px solid var(--color-border);
+    padding-top: 1.5em;
+  }
+
+  &__copy { 
+    opacity: 0.8; 
+    margin-bottom: var(--gap-sm);
+    margin-right: var(--gap-sm);
+    font-size: 0.9rem; 
+
+    a { @mixin attention { text-decoration: underline; } }
+
+    @media (--mq-sm) { 
+      font-size: 1rem; 
+      margin-bottom: 0;
+    }
+  }
+}

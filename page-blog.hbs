@@ -1,0 +1,20 @@
+{{!< default}}
+
+{{#get "posts" filter="tag:hash-blog" include="tags,authors,tiers"}}
+  {{#if posts}}
+    <div class="container wrapper">
+      {{!-- Blog posts --}}
+      <div class="grid post-feed m-b-lg">
+        {{#foreach posts}}
+          {{> post-card
+            show_img=true
+          }}
+        {{/foreach}}
+      </div>
+
+      {{!-- Pagination --}}
+      {{> pagination}}
+
+    </div>
+  {{/if}}
+{{/get}} 

@@ -1,0 +1,45 @@
+/* Sections */
+.main {
+  flex: 1;
+  width: 100%;
+}
+
+/* General section style */
+.section {
+  margin-bottom: 1rem;
+
+  .grid { width: 100%; }
+
+  &-title {
+    display: inline-block;
+    font-size: calc(1.1rem + 0.25vw);
+    line-height: 1.2;
+    color: var(--color-text-acc);
+    opacity: 0.75;
+    margin-bottom: 0.75rem;
+    font-weight: var(--font-weight-bold);
+
+    &.sm { font-size: calc(1rem + 0.25vw); }
+  }
+}
+
+.err {
+  margin: 2em auto; 
+  position: relative;    
+  max-height: 30rem;
+
+  &__content {
+    position: absolute;
+    max-width: 32rem;
+    text-align: center;
+  }
+
+  svg {
+    max-width: 100%;
+    object-fit: cover;
+    height: 100%;
+  }
+
+  &__description { margin-bottom: 1.25em; }
+}
+

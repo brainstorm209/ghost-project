@@ -1,0 +1,10 @@
+<ul class="nav{{#if isSecondary}} secondary submenu{{/if}}">
+  {{#foreach navigation}}
+    <li class="{{link_class for=(url) class=(concat "nav-" slug)}}{{#match label.[0] "-"}} is-subitem{{/match}}" 
+      data-label="{{label}}" data-length="{{label.length}}">
+      <a href="{{url absolute="true"}}">
+        <span>{{label}}</span>
+      </a>
+    </li>
+  {{/foreach}}
+</ul>

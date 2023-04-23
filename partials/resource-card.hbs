@@ -1,0 +1,35 @@
+{{!-- Post Card --}}
+<article class="resource-card{{#if feature_image}} has-img{{else}} no-image{{/if}}{{#if featured}} is-featured{{/if}}{{#if class}} {{class}}{{/if}} js-resource-card"
+  data-image-style="{{@custom.resources_card_image}}" data-tags="{{#foreach tags}}{{slug}}{{#unless @last}},{{/unless}}{{/foreach}}" data-show="true"> 
+  
+  <a href="{{url}}">
+    {{!-- Feature Image --}}
+    {{#if feature_image}}
+      <figure class="resource-card__media">
+        {{> image
+          image_type="post"
+          image_class="lazyload resource-card__img"
+          image_url=feature_image
+          size_s=true
+          size_m=true
+        }}
+      </figure>
+    {{/if}}
+
+    {{#if featured}}<span class="resource-card__featured">{{>icon name="fire"}}</span>{{/if}}
+
+    {{!-- Resource card content --}}
+    <div class="resource-card__content {{content_class}}">
+      {{!-- Resource card title --}}
+      <h2 class="resource-card__title">{{title}}</h2>
+      {{!-- Resource card excerpt --}}
+      <p class="resource-card__excerpt">{{#if custom_excerpt}}{{custom_excerpt}}{{else}}{{excerpt words="20"}}{{/if}}</p>
+
+      {{!-- Resource card tags --}}
+      <div class="resource-card__tags">
+        {{#foreach tags limit="3"}}<span {{#if accent_color}}style="--color-accent:{{accent_color}};"{{/if}}>{{name}}</span>{{/foreach}}
+      </div>
+    </div>
+  </a>
+
+</article>

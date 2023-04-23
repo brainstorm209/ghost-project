@@ -1,0 +1,169 @@
+.subscribe-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--global-radius);
+  position: relative;
+  width: 100%;
+
+  button, input { 
+    width: 100%; 
+    min-height: 46px;
+    border-radius: inherit;
+
+    @media (--mq-sm) {
+      min-height: 50px;
+    }
+  }
+
+  input {
+    padding: 0.75em var(--gap);
+    line-height: 1;
+    border-color: var(--color-border);
+
+    @mixin attention {
+      box-shadow: 0 0 0 var(--border-width) hsl(var(--color-brand-h) var(--color-brand-s) 50%);
+      border-color: var(--color-transparent);
+    }
+
+    @mixin focus-visible {
+      outline-width: 1px;
+      box-shadow: 0 0 0 3px hsla(var(--color-focus-hsl) / 25%);
+    }
+  }
+
+  &[data-style="inline"] {
+    @media (--mq-sm) {
+      flex-direction: row;
+      max-width: 32rem;
+      margin: 0 auto;
+
+      input { 
+        margin-bottom: 0;
+        margin-right: var(--gap); 
+        flex: 2;
+      }
+
+      button { flex: 1; }
+    }
+  }
+
+  &[data-style="inline-joined"] {
+    @media (--mq-sm) {
+      flex-direction: row;
+      flex-wrap: wrap;
+
+      @mixin attention {
+        input.bg-opaque {
+          background-color: hsla(var(--color-bg-base-reverse) / 3%);
+        }
+      }
+
+      input { 
+        margin: 0;
+        border: none;
+        box-shadow: none;
+        min-height: 56px;
+
+        &.bg-opaque {
+          background-color: hsla(var(--color-bg-base-reverse) / 5%);
+        }
+
+        @mixin focus-visible {
+          outline-width: 1px;
+          box-shadow: 0 0 0 3px hsla(var(--color-focus-hsl) / 25%);
+        }
+      }
+
+      button { 
+        position: absolute; 
+        top: 5px;
+        right: 5px;
+        width: auto;
+        min-width: 40%;
+        min-height: 0;
+        height: calc(100% - 10px);
+      }
+
+      .msg-error, .msg-success {
+        position: absolute;
+        bottom: -1.5rem;
+      }
+    }
+  }
+
+  /* Message styles */
+  .msg-error, .msg-success { 
+    font-size: 0.9rem;
+    font-weight: var(--font-weight-semi-bold);
+    display: none; 
+    width: 100%;
+    margin-top: 1em;
+  }
+
+  .msg-error { color: var(--color-error); }
+  .msg-success { color: var(--color-success); }
+
+  &.success button,
+  &.error button {
+    color: var(--color-white);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &:before { display: none; }
+
+    &:after { 
+      width: 22px;
+      height: 22px;
+      margin-left: 6px;
+    }
+  }
+
+  &.success button { 
+    --bg-accent: var(--color-success);
+    &:after { content: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='22' height='22' viewBox='0 0 24 24' stroke-width='2' stroke='white' fill='none' stroke-linecap='round' stroke-linejoin='round'%3e%3cpath stroke='none' d='M0 0h24v24H0z' fill='none'/%3e%3ccircle cx='12' cy='12' r='9'/%3e%3cpath d='M9 12l2 2l4 -4'/%3e%3c/svg%3e"); }
+  }
+
+  &.error button { 
+    --bg-accent: var(--color-error);
+    &:after { content: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='22' height='22' viewBox='0 0 24 24' stroke-width='2' stroke='white' fill='none' stroke-linecap='round' stroke-linejoin='round'%3e%3cpath stroke='none' d='M0 0h24v24H0z' fill='none'/%3e%3ccircle cx='12' cy='12' r='9'/%3e%3cpath d='M10 10l4 4m0 -4l-4 4'/%3e%3c/svg%3e"); }
+  }
+
+  &.success .msg-success,
+  &.error .msg-error { 
+    display: block; 
+  }
+}
+
+form.loading {
+  button {
+    position: relative;
+    color: var(--color-transparent);
+    pointer-events: none;
+
+    &:after {
+      content: '';
+      display: block;
+      position: absolute;
+      width: 22px;
+      height: 22px;
+      margin-left: -11px;
+      margin-top: -11px;
+      top: 50%;
+      left: 50%;
+      border: 2px solid var(--color-light);
+      border-radius: 50%;
+      border-right-color: var(--color-transparent);
+      border-top-color: var(--color-transparent);
+      z-index: 1;
+      animation: spin var(--transition-duration) infinite linear;
+    }
+
+    &.btn--brand:after {
+      border-left-color: var(--color-brand-contrast);
+      border-bottom-color: var(--color-brand-contrast);
+    }
+  }
+}

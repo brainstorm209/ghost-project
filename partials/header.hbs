@@ -1,0 +1,102 @@
+{{!-- Site header --}}
+<header class="header js-header" {{#if @custom.header_position}}data-header="{{@custom.header_position}}"{{/if}}>
+  <div class="container wrapper flex is-rel header__inner">
+    {{!-- Site logo or title --}}
+    {{#link href=@site.url class="header__brand"}}
+      {{#if @site.logo}}
+        {{!-- Site logo --}}
+        {{> image
+          image_type="site"
+          image_class="header__logo"
+          image_url=@site.logo
+          size_s=true
+          loading="eager"
+        }}
+      {{else}}
+        {{!-- Site Title --}}
+        <span class="header__title m-0 p-0">{{@site.title}}</span>
+      {{/if}}
+    {{/link}}
+
+    {{!-- Menu --}}
+    <nav class="header__menu items-center">
+      {{!-- Main navigation --}}
+      {{navigation}}
+
+      {{!-- Secondary menu dropdown --}}
+      {{#if @site.secondary_navigation}}
+        <div class="header__menu--sub items-center">
+          <button class="header__menu--more is-mainitem" aria-label="{{t "Menu"}}">{{> icon name="dots"}}</button>
+          {{navigation type="secondary"}}
+        </div>
+      {{/if}}
+    </nav>
+
+    {{!-- spacing --}}
+    <span class="header--spacer"></span>
+
+    {{!-- Native Search --}}
+    <button class="btn-toggle header-search__toggle" data-ghost-search title="{{t "Search"}}" aria-label="{{t "Search"}}">
+      {{> icon name="search"}}
+    </button>
+
+    {{!-- Sign up Button --}}
+    {{#if @site.members_enabled}}
+      {{#if @member.paid}}
+      {{else if @member}}
+        {{!-- nothing --}}
+      {{else}}
+        <a href="/signup/" class="btn signup-link btn--brand radius"{{#if @custom.use_portal_links}} data-portal="signup"{{/if}}>{{t "Subscribe"}}</a>
+      {{/if}}
+    {{/if}}
+
+    {{!-- Member--}}
+    {{#if member}}
+      <button class="header__user--toggle flex-cc js-member-btn{{#if @member}} is-member{{else}} is-not-member{{/if}}" 
+          title="{{#if @member}}{{customer.name}}{{else}}{{t "Menu"}}{{/if}}" 
+          aria-label="{{#if @member}}{{customer.name}}{{else}}{{t "Menu"}}{{/if}}">
+        {{#if @member}}
+          <img class="header__user-avatar" 
+            src="{{@member.avatar_image}}"
+            alt="{{@member.name}}">
+        {{/if}}
+        {{>icon name="user" size="md"}}
+      </button>
+    {{/if}}
+
+    {{> member-menu}}
+
+    {{!-- Menu Button --}}
+    <button class="btn-toggle menu__toggle js-menu-open"
+      type="button" title="{{t "Menu"}}" aria-label="{{t "Menu"}}">
+        <span></span>
+        <span></span>
+    </button>
+  </div>
+</header>
+
+{{#contentFor "scripts"}}
+<script>
+  const navItems = document.querySelectorAll('.header .nav:not(.submenu) li')
+  const allNavItems = document.querySelectorAll('.is-subitem')
+
+  // Remove '-' signs
+  allNavItems.forEach(item => {
+    const itemName = item.querySelector('a span')
+    itemName.innerText = itemName.innerText.slice(1)
+  });
+
+  // Add subitems in place
+  let subMenu, hasItems
+  navItems.forEach((item, index) => {
+    if (item.classList.contains('is-subitem') && !navItems[index - 1].classList.contains('is-subitem')) navItems[index - 1].classList.add('is-mainitem'); 
+    subMenu = item.classList.contains('is-subitem') ? subMenu : document.createElement('ul');
+    if (item.classList.contains('is-subitem')) { 
+      subMenu.appendChild(item)
+      subMenu.classList.add('nav','submenu')
+    } else { 
+      item.appendChild(subMenu)
+    }
+  });
+</script>
+{{/contentFor}}

@@ -1,0 +1,15 @@
+<form class="subscribe-form{{#if form_class}} {{form_class}}{{/if}}" {{#if cove}}id="cove-login"{{/if}}
+  data-members-form="{{#if form_type}}{{form_type}}{{else}}subscribe{{/if}}" data-style="{{form_style}}">
+  {{#if name_field}}
+    <input data-members-name autocomplete="name" type="text" placeholder="{{t "Your name"}}" 
+      aria-labelledby="{{#if input_label}}{{input_label}}{{else}}form-input-label{{/if}}" required>
+  {{/if}}
+  <input data-members-email class="{{input_class}}{{#if cove}} cove-input{{/if}}" 
+    type="email" autocomplete="email" placeholder="{{t "Your email address"}}" 
+    aria-labelledby="{{#if input_label}}{{input_label}}{{else}}form-input-label{{/if}}" required> 
+  <button class="btn {{#if button_class}}{{button_class}}{{else}}btn--brand{{/if}}" type="submit">
+    <span>{{#if button_text}}{{button_text}}{{else}}{{t "Subscribe"}}{{/if}}</span>
+  </button>
+  <div class="msg-success">{{t "Great! Check your inbox and click the link."}}</div>
+  <div class="msg-error">{{t "Sorry, something went wrong. Please try again."}}</div>
+</form>

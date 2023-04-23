@@ -1,0 +1,88 @@
+
+{{!-- Render all tiers (public) --}}{{! Get all tiers with monthly price, yearly price, and benefits data }}
+{{#get "tiers" include="monthly_price,yearly_price,benefits" filter="type:[{{type}}]+visibility:public" limit="all" as |tiers|}}
+  {{#if tiers}}
+    <div class="membership js-membership" data-plan-type="yearly" data-member-status="{{#if @member}}{{@member.status}}{{else}}none{{/if}}">
+
+      {{!-- Membership plan toggle --}}
+      <div class="data-plan-switch m-b-lg">
+        <button class="js-plan-toggle" data-plan-toggle="monthly" onclick="onDataPlanSwitch('monthly')">{{t "Monthly"}}</button>
+        <button class="js-plan-toggle" data-plan-toggle="yearly" onclick="onDataPlanSwitch('yearly')">{{t "Yearly"}}</button>
+      </div>
+
+      <div class="grid pricing m-b-lg" data-tiers-count="{{tiers.length}}">
+        {{#foreach tiers}}
+          <div class="card tier tier-{{#match type "free"}}free{{else}}{{slug}}{{/match}}" 
+            data-tier="{{@number}}" style="--color-accent: var(--color-tier-{{@number}},var(--color-brand))" data-currency="{{currency}}">
+
+            {{!-- Title & Price --}}
+            <header class="tier__hdr flex flex-col text-acc">
+              <h2 class="tier__title">{{name}}</h2>
+              <div class="tier__price">
+                {{#match type "free"}}
+                  <span class="price">{{price 0 currency="USD"}}</span>
+                {{/match}}
+
+                {{#if monthly_price}}
+                  <div data-plan="monthly">
+                    <span class="price">
+                      {{price monthly_price currency=currency}}
+                    </span>
+                    <span class="billing-period">/{{t "month"}}</span>
+                    {{#if trial_days}}<span class="trial-days">{{trial_days}} {{t "days free"}}</span>{{/if}}
+                  </div>
+                {{/if}}
+
+                {{#if yearly_price}}
+                  <div data-plan="yearly">
+                    <span class="price">
+                      {{price yearly_price currency=currency}}
+                    </span>
+                    <span class="billing-period">/{{t "year"}}</span>
+                    {{#if trial_days}}<span class="trial-days">{{trial_days}} {{t "days free"}}</span>{{/if}}
+                     <span class="discount" data-discount="0" {{#if monthly_price}}data-monthly-price="{{price monthly_price}}"{{/if}} data-yearly-price="{{price yearly_price}}">{{t "discount"}}</span>
+                  </div>
+                {{/if}}
+              </div>
+              <p class="tier__description text-acc">{{description}}</p>
+            </header>
+
+            {{!-- Separator --}}
+            <hr>
+            
+            {{!-- Benefits --}}
+            <ul class="tier__benefits text-acc">
+              {{#foreach benefits as |benefit|}}
+                <li>{{benefit}}</li>
+              {{/foreach}}
+            </ul>
+
+            {{!-- Price --}}
+            {{#if monthly_price}}
+              <a href="javascript:" data-plan="monthly" data-portal="signup/{{id}}/monthly"
+                class="btn uppercase btn--accent btn--sm">
+                {{t "Subscribe now"}}
+              </a>
+            {{/if}}
+
+            {{#if yearly_price}}
+              <a href="javascript:" data-plan="yearly" data-portal="signup/{{id}}/yearly" 
+                  class="btn uppercase btn--accent btn--sm">
+                {{t "Subscribe now"}}
+              </a>
+            {{/if}}
+
+            {{!-- Free signup --}}
+            {{#match type "free"}}
+              {{#if @custom.use_portal_links}}
+                {{#link href="/signup/" data-portal="signup" class="btn uppercase btn--sm btn--accent"}}{{t "Subscribe now"}}{{/link}}
+              {{else}}
+                {{#link href="/signup/" class="btn uppercase btn--sm btn--accent"}}{{t "Subscribe now"}}{{/link}}
+              {{/if}}
+            {{/match}}
+          </div>
+        {{/foreach}}
+      </div>
+    </div>
+  {{/if}}
+{{/get}}

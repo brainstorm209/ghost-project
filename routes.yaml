@@ -1,0 +1,33 @@
+routes:
+  /signup/: 
+    template: signup
+    # data: page.signup # When active data will be taken from the  "/signup/" page
+  /signin/: 
+    template: signin
+    # data: page.signin # When active data will be taken from the  "/signin/" page
+  /account/: 
+    template: account 
+    # data: page.account # When active data will be taken from the  "/account/" page
+  /membership/:
+    template: membership
+    # data: page.membership # When active data will be taken from the  "/membership/" page
+  /resources/:
+    template: resources
+    # data: page.resources # When active data will be taken from the  "/resources/" page
+
+collections:
+  # Homepage
+  /:
+    permalink: /{slug}/
+    template: index
+    filter: tag:-hash-blog
+  # Blog
+  /blog/:
+    permalink: /{slug}/
+    template: blog
+    # data: page.blog # When active data will be taken from the  "/blog/" page
+    filter: tag:hash-blog
+  
+taxonomies:
+  tag: /tag/{slug}/
+  author: /author/{slug}/

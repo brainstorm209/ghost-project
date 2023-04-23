@@ -1,0 +1,31 @@
+{{!< default}}
+
+{{!-- Page Hero --}}
+{{#page}}
+  {{> post-hero 
+    image_style="hidden"
+  }}
+{{else}}
+  <div class="hero__content flex flex-col flex-cc m-t-lg m-b-lg">
+    <h1 class="hero__title text-center">{{t "Blog"}}</h1>
+  </div>
+ 
+{{/page}}
+{{#get "posts" filter="tag:hash-blog" include="tags,authors,tiers"}}
+  {{#if posts}}
+    <div class="container wrapper">
+      {{!-- Blog posts --}}
+      <div class="grid post-feed m-b-lg">
+        {{#foreach posts}}
+          {{> post-card
+            show_img=true
+          }}
+        {{/foreach}}
+      </div>
+
+      {{!-- Pagination --}}
+      {{> pagination}}
+
+    </div>
+  {{/if}}
+{{/get}} 

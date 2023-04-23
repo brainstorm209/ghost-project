@@ -1,0 +1,77 @@
+{{!-- Post Card --}}
+<article class="post-card{{#if feature_image}} has-img{{else}} no-image{{/if}}{{#if featured}} is-featured{{/if}}{{#if class}} {{class}}{{/if}} js-post-card"> 
+
+  {{!-- Feature Image --}}
+  {{#if feature_image}}
+    {{#unless hide_img}}
+      {{#link href=url class="post-card__media"}}
+        <figure class="post-card__figure">
+          {{> image
+            image_type="post"
+            image_class="lazyload post-card__img"
+            image_url=feature_image
+            size_s=true
+            size_m=true
+          }}
+        </figure>
+      {{/link}}
+    {{/unless}}
+  {{/if}}
+
+  {{!-- Post card content --}}
+  <div class="post-card__content {{content_class}}">
+
+    <div class="post-card__header flex items-center">
+      {{!-- Post Card main tag --}}
+      {{#foreach tags limit="1"}}
+        <a class="post-card__tag tag-{{slug}}" href="{{url}}" aria-label="{{name}}"
+          {{#if accent_color}} style="--color-accent: {{accent_color}}"{{/if}}
+        >{{name}}</a>
+      {{/foreach}}
+
+      {{!-- Element for spacing --}}
+      <span class="flex-1"></span>
+
+      {{!-- Post access/visibility --}}
+      {{#match visibility "!=" "public"}}
+        <div class="post-card__visibility{{#if access}} has-access{{/if}}">
+          {{#if access}}{{> icon name="lock-open" size="14"}}{{else}}{{> icon name="lock" size="14"}}{{/if}}
+          <span {{#has visibility="tiers"}}data-tiers="{{tiers}}"{{/has}}>
+            {{#has visibility="tiers"}}{{tiers}}{{else}}{{visibility}}{{/has}}
+          </span>
+        </div>
+      {{/match}}
+
+      {{!-- Featured --}}
+      {{#if featured}}
+        <span class="post-card__featured flex flex-cc">{{> icon name="star" size="14"}}</span>
+      {{/if}}
+    </div>
+
+    {{!-- Post Card Title --}}
+    <h2 class="post-card__title">
+      {{#link href=url aria-label=(title)}}{{title}}{{/link}}
+    </h2>
+
+    {{!-- Post card excerpt --}}
+    {{#if custom_excerpt}}
+      <div class="post-card__excerpt opacity-080">
+        {{custom_excerpt}}
+      </div>
+    {{else}}
+      {{#if excerpt}} 
+        <div class="post-card__excerpt opacity-080">
+          {{excerpt words="20"}}
+        </div>
+      {{/if}}
+    {{/if}}
+
+    {{!-- Element for spacing --}}
+    <span class="flex-1"></span>
+
+    {{!-- Post Card author & date --}}
+    {{> post-info}}
+    
+  </div>
+
+</article>

@@ -1,0 +1,54 @@
+{{!< default}}
+
+{{!-- page header --}}
+{{#page}} 
+  {{> post-hero 
+    image_style="hidden"
+  }}
+{{else}}
+  <div class="post-hero is-page flex flex-col flex-cc m-t-lg m-b-xl">
+    <h1 class="post-hero__title text-center">{{t "Membership"}}</h1>
+  </div>
+{{/page}}
+
+<div class="container wrapper">
+  {{#if @member.paid}}
+    {{!-- Redirect --}}
+    {{#if @custom.use_portal_links}}
+      <script>window.location = '{{@site.url}}/membership/#/portal/account/';</script>
+    {{else}}
+      <script>window.location = '{{@site.url}}/account/';</script>
+    {{/if}}
+  {{else if @member}}
+    {{!-- For free member show paid plans only --}}
+    {{> member-tiers type="paid"}}
+  {{else}}
+    {{!-- Show all plans --}}
+    {{> member-tiers type="free,paid"}}
+  {{/if}}
+
+  {{!-- To add some additional content create the /membership/ page --}}
+  {{#page}}
+    {{#if access}}
+      <article class="{{post_class}} content post-access-{{visibility}}">
+        {{content}}
+      </article>
+    {{/if}}
+  {{/page}}
+
+  {{#contentFor "scripts"}}
+    <script>
+      const onDataPlanSwitch = (value) => {
+        document.querySelector('.js-membership').setAttribute('data-plan-type', value);
+      };
+      document.querySelectorAll('[data-discount][data-monthly-price]').forEach(plan => {
+        const monthly = parseInt(plan.getAttribute('data-monthly-price'));
+        const yearly = parseInt(plan.getAttribute('data-yearly-price'));
+        const discount = Math.round((1 - yearly/(12*monthly)) * 100);
+        if ( discount > 0 && discount < 100 ) {
+          plan.setAttribute('data-discount', `${discount}%`);
+        }
+      })
+    </script>
+  {{/contentFor}}
+</div>

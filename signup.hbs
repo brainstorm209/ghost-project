@@ -1,0 +1,78 @@
+{{!< default}}
+
+<div class="signup-page flex flex-cc" data-image-style="right">
+  {{#if @member.paid}}
+
+    {{!-- Logged in, paying member: Redirect home --}}
+    <script>window.location = '{{@site.url}}';</script>
+
+  {{else if @member}}
+
+    {{!-- Logged in, paying member: Redirect to account page --}}
+    <script>window.location = '/account/';</script>
+    {{!-- Portal link --}}
+    {{!-- <script>window.location = '{{@site.url}}/#/portal/account/';</script> --}}
+    
+  {{else}}
+    <div class="signup-page__content">
+      <a href="{{@site.url}}" class="signup-page__brand">
+        {{#if @site.logo}}
+          {{> image
+            image_type="site"
+            image_class="lazyload"
+            image_url=@site.logo
+            size_s=true
+          }}
+        {{else}}
+          {{@site.title}}
+        {{/if}}
+      </a>
+
+      <div class="signup-page__box">
+        {{#unless @site.members_invite_only}}
+          <h1 class="signup-page__title">{{#page}}{{title}}{{else}}{{t "Sign up"}}{{/page}}</h1>
+          <p id="form-input-label" class="opacity-080">{{#page}}{{excerpt}}{{else}}{{t "Sign up to {sitetitle} to get access to premium content." sitetitle=@site.title}}{{/page}}</p>
+          
+          {{> subscribe-form 
+            form_type="signup" 
+            form_class=""
+            button_class="uppercase btn--brand"
+            button_text=(t 'Continue') 
+            name_field=true
+          }}
+        {{else}}
+          <p class="text-center text-11 fw-600">{{t "This site is invite-only, contact the owner for access."}}</p>
+        {{/unless}}
+        <p class="m-0 m-t text-center">
+          <small>{{t "Already have an account?"}} 
+            {{#link href="/signin/"}}{{t "Sign in"}}{{/link}}
+          </small>
+        </p>
+      </div>
+    </div>
+    {{#page}}
+      {{#if feature_image}}
+        <figure class="signup-page__media{{#if feature_image_caption}} has-caption{{/if}}">
+          <svg class="signup-page__shape"viewBox="0 0 900 600" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1">
+            <path d="M49 0L45.2 20C41.3 40 33.7 80 34 120C34.3 160 42.7 200 48 240C53.3 280 55.7 320 51.3 360C47 400 36 440 31.5 480C27 520 29 560 30 580L31 600L0 600L0 580C0 560 0 520 0 480C0 440 0 400 0 360C0 320 0 280 0 240C0 200 0 160 0 120C0 80 0 40 0 20L0 0Z"
+              fill="var(--color-bg)" stroke-linecap="round" stroke-linejoin="miter">
+            </path>
+          </svg>
+          {{> image
+            picture_class="h-100 w-100"
+            image_type="post"
+            image_class="lazyload"
+            image_url=feature_image
+            size_s=true
+            size_m=true
+            size_l=true
+            size_xl=true
+          }}
+          {{#if feature_image_caption}}
+            <figcaption>{{feature_image_caption}}</figcaption>
+          {{/if}}
+        </figure>
+      {{/if}}
+    {{/page}}
+  {{/if}}
+</div>

@@ -1,0 +1,72 @@
+{{!< default}}
+
+{{!-- Everything inside the #post tags pulls data from the post --}}
+{{#post}}
+  <div class="container wrapper">
+
+    {{!-- Hero --}}
+    {{> post-hero 
+      image_style="hidden"
+    }}
+
+    <div class="row m-b-lg">
+      <div class="col-xs-12 col-lg-8">
+        {{!-- Post feature image --}}
+        {{#if feature_image}}
+          <figure class="post-hero__figure m-b-lg">
+            {{> image
+              image_type="post"
+              image_class="lazyload post-hero__img"
+              image_url=feature_image
+              size_s=true
+              size_m=true
+              size_l=true
+              size_xl=true
+            }}
+            {{!-- Figcaption --}}
+            {{#if feature_image_caption}}<figcaption>{{feature_image_caption}}</figcaption>{{/if}}
+          </figure>
+        {{/if}}
+  
+        {{!-- Post content --}}
+        <article class="{{post_class}} content post-access-{{visibility}} no-overflow">
+          {{content}}
+        </article>
+
+        {{!-- Social share & Tags --}}
+        {{#is "post"}}
+          {{!-- Tags --}}
+          {{> post-tags}}
+          
+          {{!-- Share --}}
+          {{#if access}}
+            {{> social-share class="m-b-lg"}}
+          {{/if}}
+        {{/is}}
+      </div>
+
+      <div class="col-xs-12 col-lg-4 sidebar__wrapper">
+        {{> sidebar}}
+      </div>
+    </div>
+
+    {{!-- Comments & Related --}}
+    {{#is "post"}}
+      <div class="flex flex-wrap gap-lg m-b-lg">
+        {{!-- Comments --}}
+        {{> comments}}
+
+        {{!-- Related posts --}}
+        {{> related}}
+      </div>
+    {{/is}}
+  </div>
+
+  {{!-- Table of contents --}}
+  {{#has tag="#toc"}}
+    {{#if access}}
+      {{> toc}}
+    {{/if}}
+  {{/has}}
+
+{{/post}}

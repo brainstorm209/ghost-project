@@ -1,0 +1,38 @@
+/* Html & Body */
+html, body {
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-normal);
+  font-family: var(--font-body);
+  line-height: var(--line-height-base);
+  letter-spacing: var(--letter-spacing);
+
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-txt-size-adjust: 100%;
+  -ms-txt-size-adjust: 100%;
+
+  -webkit-hyphens: var(--global-hyphens);
+  -ms-hyphens: var(--global-hyphens);
+  hyphens: var(--global-hyphens);
+
+  scroll-behavior: var(--global-scroll-behavior);
+}
+
+body {
+  color: var(--color-text);
+  background-color: var(--color-bg);
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
+  position: relative;
+}
+
+
+@media (print), (prefers-reduced-motion: reduce) { 
+  body {
+    --transition-duration: 1ms;
+    --global-scroll-behavior: auto;
+  }
+}

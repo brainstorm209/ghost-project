@@ -1,0 +1,10 @@
+.grid { display: grid; }
+
+.grid.post-feed {
+  grid-gap: var(--gap-lg);
+  grid-template-columns: repeat(auto-fit,minmax(16rem,1fr));
+
+  @media (--mq-md) {
+    grid-template-columns: repeat(auto-fit,minmax(22rem,1fr));
+  }
+}

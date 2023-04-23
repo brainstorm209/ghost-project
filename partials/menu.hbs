@@ -1,0 +1,42 @@
+{{!-- Blog menu --}}
+<div class="menu js-menu">
+  <div class="menu__header flex content-end">
+    {{!-- Menu Button --}}
+    <button class="btn-toggle menu__toggle is-active js-menu-close"
+      type="button" title="{{t "Menu"}}" aria-label="{{t "Menu"}}">
+        <span></span>
+        <span></span>
+    </button>
+  </div>
+
+  {{!-- Navigation --}}
+  <nav class="menu__navigation">
+    {{navigation}}
+
+    {{#if @site.secondary_navigation}}
+      {{navigation type="secondary"}}
+    {{/if}}
+  </nav>
+
+  {{!-- Subscribe --}}
+  <div class="menu__actions flex w-100">
+    {{!-- Sign up Button --}}
+    {{#if @member}}
+      <a href="javascript:" data-members-signout class="btn signin-link btn--bordered radius m-r">
+        {{t "Log out"}}
+      </a>
+      <a href="/account/"{{#if @custom.use_portal_links}} data-portal="signup"{{/if}} class="btn signup-link btn--brand radius">
+        {{t "Account"}}
+      </a>
+    {{else}}
+      {{#if @site.members_enabled}}
+        <a href="/signin/"{{#if @custom.use_portal_links}} data-portal="signin"{{/if}} class="btn signin-link btn--bordered radius m-r">
+          {{t "Log in"}}
+        </a>
+        <a href="/signup/"{{#if @custom.use_portal_links}} data-portal="signup"{{/if}} class="btn signup-link btn--brand radius">
+          {{t "Subscribe"}}
+        </a>
+      {{/if}}
+    {{/if}}
+  </div>
+</div>

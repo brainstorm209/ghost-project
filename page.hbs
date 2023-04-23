@@ -1,0 +1,27 @@
+{{!< default}}
+
+{{!-- Everything inside the #post tags pulls data from the post --}}
+{{#post}}
+
+  <div class="container wrapper">
+  
+    {{!-- Hero --}}
+    {{> post-hero 
+      image_style="default"
+    }}
+
+    {{!-- Article --}}
+    <article class="{{page_class}} content post-access-{{visibility}}">
+      {{content}}
+    </article>
+    
+  </div>
+  
+  {{!-- Table of contents --}}
+  {{#has tag="#toc"}}
+    {{#if access}}
+      {{> toc}}
+    {{/if}}
+  {{/has}}
+
+{{/post}}

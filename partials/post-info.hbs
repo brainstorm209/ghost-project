@@ -1,0 +1,28 @@
+<div class="post-info text-acc {{class}}"> 
+  <ul class="post-info__avatars">
+    {{#foreach authors}}
+      <li class="author-avatar {{#if profile_image}}has-image{{else}}has-icon{{/if}}">
+        <a href="{{url}}" title="{{name}}" aria-label="{{name}}">
+          {{#if profile_image}}
+            {{> image
+              image_type="author"
+              image_class="lazyload"
+              image_url=profile_image
+              size_xxs=true
+              size_xs=true
+            }}
+          {{else}}
+            {{>icon name="user"}}
+          {{/if}}
+        </a>
+      </li>
+    {{/foreach}}
+  </ul>
+  <div class="post-info__detail">
+    <span class="post-info__author">{{authors}}</span>
+    <div class="post-info__dr">
+      <time datetime="{{date format="YYYY-MM-DD"}}">{{date}}</time> 
+      {{#if reading_time}}<span class="post-info__readtime">{{reading_time minute=(t '1 min read') minutes=(t '% min read')}}</span>{{/if}}
+    </div>
+  </div>
+</div>

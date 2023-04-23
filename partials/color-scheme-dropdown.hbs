@@ -1,0 +1,12 @@
+{{!-- Color scheme dropdown --}}
+<div class="color-scheme flex flex-cc radius-half">
+  <div class="color-scheme-symbol">
+    <span class="accent-bg"></span>
+  </div>
+  <select class="color-scheme-select radius-half js-color-scheme-select" aria-label="{{t "Change color scheme"}}">
+    <option value="system" selected>{{t "System"}}</option>
+    <option value="light">{{t "Light"}}</option>
+    <option value="dark">{{t "Dark"}}</option>
+  </select>
+  {{> icon name="select"}}
+</div>

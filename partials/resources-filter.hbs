@@ -1,0 +1,34 @@
+{{#if @custom.resources_filter_slugs}}
+  {{#get "tags" filter="slug:[{{@custom.resources_filter_slugs}}]" limit="all"}}
+    {{#if tags}}
+      <nav class="resources-nav">
+        <ul class="resources-filter">
+          <li class="resources-filter-all">
+            <button class="resource-btn all">
+              <span class="resource-btn-name">{{t "All resources"}}</span>
+              <span data-count=""></span>
+            </button>
+          </li>
+          {{#foreach tags}}
+            <li style="--color-accent:{{#if accent_color}}{{accent_color}}{{else}}var(--color-brand){{/if}}">
+              <a href="#{{slug}}" class="resource-btn {{slug}}" data-category="{{slug}}">
+                {{#if feature_image}}
+                  {{> image
+                    picture_class="flex"
+                    image_type="tag"
+                    image_class="lazyload resource-btn__img"
+                    image_url=feature_image
+                    size_xxs=true
+                    size_xs=true
+                  }}
+                {{/if}}
+                <span class="resource-btn-name">{{name}}</span>
+                <span data-count></span>
+              </a>
+            </li>
+          {{/foreach}}
+        </ul>
+      </nav>
+    {{/if}}
+  {{/get}}
+{{/if}}

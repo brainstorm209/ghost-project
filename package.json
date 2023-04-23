@@ -1,0 +1,200 @@
+{
+  "name": "rinne",
+  "description": "Rinne Ghost Theme",
+  "demo": "https://rinne.bironthemes.com",
+  "version": "1.0.3",
+  "engines": {
+    "ghost": ">=5.0.0"
+  },
+  "author": {
+    "name": "Biron Themes",
+    "email": "bironthemes@gmail.com",
+    "url": "https://bironthemes.com"
+  },
+  "gpm": {
+    "type": "theme",
+    "categories": [
+      "Resources",
+      "Review",
+      "Blog"
+    ]
+  },
+  "keywords": [
+    "ghost",
+    "theme",
+    "ghost-theme"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/bironthemes/rinne-ghost.git"
+  },
+  "scripts": {
+    "dev": "gulp",
+    "zip": "gscan . && gulp zip",
+    "test": "gscan ."
+  },
+  "dependencies": {
+    "@babel/core": "^7.21.0",
+    "@babel/preset-env": "^7.20.2",
+    "@tryghost/content-api": "^1.11.5",
+    "beeper": "^2.1.0",
+    "browser-sync": "^2.28.3",
+    "cssnano": "^5.1.15",
+    "cssnano-preset-advanced": "^5.3.10",
+    "fitvids": "^2.1.1",
+    "fslightbox": "^3.4.1",
+    "fuse.js": "^6.6.2",
+    "gscan": "^4.36.1",
+    "gulp": "^4.0.2",
+    "gulp-babel": "^8.0.0",
+    "gulp-concat": "^2.6.1",
+    "gulp-postcss": "^9.0.1",
+    "gulp-rename": "^2.0.0",
+    "gulp-uglify": "^3.0.2",
+    "gulp-zip": "^5.1.0",
+    "headroom.js": "^0.12.0",
+    "lazysizes": "^5.3.2",
+    "postcss": "^8.4.21",
+    "postcss-cssential": "^1.1.0",
+    "postcss-import": "^15.1.0",
+    "postcss-mixins": "^9.0.4",
+    "postcss-nested": "^5.0.6",
+    "postcss-preset-env": "^7.8.3",
+    "pump": "^3.0.0",
+    "tiny-slider": "^2.9.4",
+    "tocbot": "^4.20.1"
+  },
+  "config": {
+    "card_assets": true,
+    "posts_per_page": 24,
+    "image_sizes": {
+      "xxs": {
+        "width": 30
+      },
+      "xs": {
+        "width": 100
+      },
+      "s": {
+        "width": 300
+      },
+      "m": {
+        "width": 600
+      },
+      "l": {
+        "width": 1000
+      },
+      "xl": {
+        "width": 2000
+      }
+    },
+    "custom": {
+      "color_scheme": {
+        "type": "select",
+        "options": [
+          "system",
+          "light",
+          "dark"
+        ],
+        "default": "system"
+      },
+      "font_family": {
+        "type": "select",
+        "options": [
+          "System font",
+          "Figtree",
+          "Space Grotesk",
+          "Outfit",
+          "Inter",
+          "Kreon",
+          "Quicksand",
+          "Azeret Mono"
+        ],
+        "default": "Figtree"
+      },
+      "header_position": {
+        "type": "select",
+        "options": [
+          "normal",
+          "sticky",
+          "floating"
+        ],
+        "default": "normal"
+      },
+      "use_portal_links": {
+        "type": "boolean",
+        "default": true
+      },
+      "cta_headline": {
+        "type": "text"
+      },
+      "cta_description": {
+        "type": "text"
+      },
+      "cta_button_text": {
+        "type": "text",
+        "default": "Subscribe"
+      },
+      "cta_button_link": {
+        "type": "text",
+        "default": "subscribe-form"
+      },
+      "hero_image_style": {
+        "type": "select",
+        "options": [
+          "background-full",
+          "background",
+          "side",
+          "bottom",
+          "hidden"
+        ],
+        "default": "background-full",
+        "group": "homepage"
+      },
+      "hero_image_filter": {
+        "type": "text",
+        "group": "homepage"
+      },
+      "resources_filter_slugs": {
+        "type": "text",
+        "group": "homepage"
+      },
+      "resources_filter_position": {
+        "type": "select",
+        "options": [
+          "sidebar",
+          "top",
+          "hidden"
+        ],
+        "default": "sidebar",
+        "group": "homepage"
+      },
+      "resources_feed_layout": {
+        "type": "select",
+        "options": [
+          "list",
+          "grid"
+        ],
+        "default": "grid",
+        "group": "homepage"
+      },
+      "resources_card_image": {
+        "type": "select",
+        "options": [
+          "small",
+          "medium",
+          "large",
+          "wide 4/3",
+          "wide 16/9",
+          "hidden"
+        ],
+        "default": "small",
+        "group": "homepage"
+      },
+      "image_lightbox": {
+        "type": "boolean",
+        "default": true,
+        "group": "post"
+      }
+    }
+  }
+}

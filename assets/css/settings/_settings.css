@@ -1,0 +1,130 @@
+/*========================================*/
+/* Settings
+/*========================================*/
+:root {
+  /* Set Brand color from Ghost Admin accent color */
+  --color-brand: var(--ghost-accent-color, #16d1aa); 
+  --color-brand-contrast: #000;
+  --color-brand-hsl: 167 81% 45%;
+
+  /* neutral colors */
+  --color-black: hsl(0 0% 0%);
+  --color-dark: hsl(0 0% 15%);
+  --color-dark-acc: hsl(0 0% 25%); 
+  --color-grey-darker: hsl(0 0% 35%);
+  --color-grey-dark: hsl(0 0% 45%);
+  --color-grey: hsl(0 0% 50%);
+  --color-grey-light: hsl(0 0% 55%);
+  --color-grey-lighter: hsl(0 0% 65%);
+  --color-light-acc: hsl(0 0% 75%);
+  --color-light: hsl(0 0% 85%);
+  --color-white: hsl(0 0% 100%);
+
+  /* semantic colors */
+  --color-error: hsl(348 97% 60%);
+  --color-success: hsl(141 53% 53%);
+  --color-warning: hsl(48 98% 67%);
+  --color-info: hsl(204 86% 54%);
+  --color-gold: hsl(51 100% 50%);
+
+  /* Social colors */
+  --color-facebook: #4267B2;
+  --color-twitter: #1DA1F2;
+  --color-linkedin: #2867B2;
+  --color-instagram: #E1306C;
+  --color-youtube: #FF0000;
+  --color-github: #333333;
+  --color-rss: #EE802F;
+  --color-mail: #DC483D;
+  --color-copy: #34A853;
+
+  /* text & background colors */
+  --color-text: var(--color-dark);
+  --color-text-acc: var(--color-dark-acc);
+  --color-text-reverse: var(--color-light);
+
+  --color-bg: hsl(0 100% 100%);
+  --color-bg-acc: hsl(0 0% 97%);
+  --color-bg-reverse: var(--color-dark);
+  --color-bg-base: 0 0% 100%;
+  --color-bg-base-reverse: 0 0% 0%;
+
+  --color-border: hsl(0 0% 92%);
+  --color-transparent: rgba(0, 0, 0, 0);
+  --color-focus-hsl: 217 99% 65%;
+  --color-focus: hsl(var(--color-focus-hsl));
+
+  /* border styles */
+  --border-color: var(--color-border);
+  --border-width: 1px;
+
+  /* Typography */
+  --font-system: -apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji";
+  --font-mono: Consolas, Monaco, monospace;
+  --font-body: var(--font-system);
+  --font-headings: var(--font-system);
+  --font-size-base: 1rem;
+  --font-weight-thin: 100;
+  --font-weight-extra-light: 200;
+  --font-weight-light: 300;
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+  --font-weight-semi-bold: 600;
+  --font-weight-bold: 700;
+  --font-weight-extra-bold: 800;
+  --font-weight-black: 900;
+  --line-height-base: 1.6;
+  --letter-spacing: 0;
+
+  /* Animation */
+  --transition-name: ease-in-out;
+  --transition-duration: 400ms;
+  --transition-duration-lg: 800ms;
+  --transition-duration-xl: 1200ms;
+  --transition-delay: 100ms;
+  --transition-default: var(--transition-duration) var(--transition-name);
+  --transition-100: 100ms var(--transition-name);
+  --transition-200: 200ms var(--transition-name);
+  --transition-400: 400ms var(--transition-name);
+  --transition-800: 800ms var(--transition-name);
+  --transition-1000: 1000ms var(--transition-name);
+
+  /* Spacing */
+  --gap: 1em;
+  --gap-rem: 1rem;
+  --gap-xs: calc(var(--gap) * 0.25);
+  --gap-sm: calc(var(--gap) * 0.5);
+  --gap-lg: calc(var(--gap) * 2);
+  --gap-xl: calc(var(--gap) * 4);
+
+  /* Breakpoints */
+  --brakepoint-sm: 36em;
+  --brakepoint-md: 48em;
+  --brakepoint-lg: 62em;
+  --brakepoint-xl: 75em;
+
+  /* Grid-system */
+  --gutter-w: 1rem;
+  --outer-m: 1rem;
+  --gutter-comp: calc(var(--gutter-w) * -1);
+  --half-gutter-w: calc(var(--gutter-w) * 0.5);
+  --container-sm: calc(var(--brakepoint-sm) + var(--gutter-w));
+  --container-md: calc(var(--brakepoint-md) + var(--gutter-w));
+  --container-lg: calc(var(--brakepoint-lg) + var(--gutter-w));
+  --container-xl: calc(var(--brakepoint-xl) + var(--gutter-w));
+}
+
+/* Changes for dark theme */
+@mixin darktheme {
+  --color-text: var(--color-light);
+  --color-text-acc: var(--color-light-acc);
+  --color-text-reverse: var(--color-dark);
+
+  --color-bg: hsl(0 0% 12%);
+  --color-bg-acc: hsl(0 0% 10%);
+  --color-bg-reverse: var(--color-light);
+  --color-bg-base: 0 0% 0%;
+  --color-bg-base-reverse: 0 0% 100%;
+  
+  --color-border: hsl(0 0% 20%);
+}

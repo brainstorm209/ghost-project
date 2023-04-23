@@ -1,0 +1,38 @@
+<div class="post-hero{{#is "post"}} is-post{{/is}}{{#is "page"}} is-page{{/is}}{{#if featured}} is-featured{{/if}}" 
+  data-feature-image="{{#if feature_image}}true{{else}}false{{/if}}" {{#if image_style}}data-image-style="{{image_style}}"{{/if}}>
+  
+  <div class="post-hero__content flex flex-col">
+    {{!-- Title --}}
+    <h1 class="post-hero__title{{#is "page"}} m-b-0{{/is}}">{{title}}</h1>
+   
+    {{!-- Custom excerpt --}}
+    {{#if custom_excerpt}}
+      <div class="post-hero__excerpt text-acc">{{custom_excerpt}}</div>
+    {{/if}}
+
+    {{!-- Authors & date --}}
+    {{#is "post"}}
+      {{> post-info class="m-t"}}
+    {{/is}}
+  </div>
+
+  {{!-- Image --}}
+  {{#if feature_image}}
+    <div class="post-hero__media">
+      <figure class="post-hero__figure">
+        {{> image
+          image_type="post"
+          image_class="lazyload post-hero__img"
+          image_url=feature_image
+          size_s=true
+          size_m=true
+          size_l=true
+          size_xl=true
+        }}
+        {{!-- Figcaption --}}
+        {{#if feature_image_caption}}<figcaption>{{feature_image_caption}}</figcaption>{{/if}}
+      </figure>
+    </div>
+  {{/if}}
+
+</div>

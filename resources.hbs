@@ -1,0 +1,77 @@
+{{!< default}}
+
+{{!-- Page Hero --}}
+{{#page}}
+  {{> post-hero 
+    image_style="hidden"
+  }}
+{{else}}
+  <div class="hero__content flex flex-col flex-cc m-t-lg m-b-xl">
+    <h1 class="hero__title text-center">{{t "Resources"}}</h1>
+  </div>
+{{/page}}
+
+<div class="container wrapper">
+  {{#if @custom.resources_filter_slugs}}
+    {{#get "tags" filter="slug:[{{@custom.resources_filter_slugs}}]+slug:-all" as |resource-categories|}}
+      {{#foreach resource-categories}}
+        <section class="section m-b-xl {{slug}}">
+          <div class="row">
+            <div class="col-xs-12 col-md-4">
+              <a href="{{url}}" class="tag-card is-link{{#if feature_image}} has-img{{/if}}"{{#if accent_color}} style="--color-accent: {{accent_color}}"{{/if}}>
+                {{!-- Tag image --}}
+                {{#if feature_image}}
+                  <figure class="tag-card__media">
+                    {{> image
+                      image_type="tag"
+                      image_class="lazyload tag-card__img"
+                      image_url=feature_image
+                      size_xs=true
+                      size_s=true
+                      size_m=true
+                    }}
+                  </figure>
+                {{/if}}
+              </a>
+            </div>
+            <div class="col-xs-12 col-md-8">
+
+              <div class="tag-info">
+                <h2 class="tag-name">{{name}}</h2>
+
+                <p class="tag-description">
+                  {{#get "posts" filter="tag:-hash-blog+tag:{{slug}}" limit="all" as |resources|}}
+                    <span class="tag-count">
+                      {{> icon name="chart" size="sm" icon_class="m-r-sm"}}
+                      {{#plural resources.length empty=(t 'No resources') singular=(t '1 resource') plural=(t '% resources')}}{{/plural}}
+                    </span>
+                    {{#if ../description}}<span class="m-l-sm m-r-sm">—</span>{{/if}}
+                  {{/get}}  
+                  {{#if description}}{{description}}{{/if}}
+                </p>
+              </div>
+
+              <div class="post-list">
+                {{!-- Get posts --}}
+                {{#get "posts" filter="tag:-hash-blog+tag:{{slug}}" limit="10" as |resources|}}
+                  {{#foreach resources to="5"}}
+                    <a class="post-list-item" href="{{url}}">
+                      <h3 class="post-list-item__title">{{title}}</h3>
+                      {{> icon name="chevron-right"}}
+                    </a>
+                  {{/foreach}}
+                  {{#match resources.length ">" "5"}}
+                    <a class="post-list__link" href="{{../url}}">
+                      <span>{{t "More resources"}}</span>
+                      {{> icon name="arrow-right" size="sm"}}
+                    </a>
+                  {{/match}}
+                {{/get}}
+              </div>
+            </div>
+          </div>
+        </section>
+      {{/foreach}}
+    {{/get}}
+  {{/if}}
+</div>

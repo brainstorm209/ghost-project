@@ -1,0 +1,50 @@
+{{!-- Content preview --}}
+<div class="content post-sneak-peek">
+  {{{html}}}
+</div>
+
+{{!-- Post Access CTA --}}
+<div class="content-cta {{visibility}}">
+  <div class="content-cta__content">
+    <h2 class="content-cta__title">{{t "Read the full story"}}</h2>
+    {{#has visibility="members"}}
+      <p class="content-cta__description">
+        {{#if @member}}{{t "Sign in"}}{{else}}{{t "Sign up"}}{{/if}} 
+        {{t "now to read the full story and get access to all posts for"}} 
+        {{t "subscribers only"}}.
+      </p>  
+    {{/has}}
+    {{#has visibility="paid"}}
+      <p class="content-cta__description">
+        {{#if @member}}{{t "Upgrade"}}{{else}}{{t "Sign up"}}{{/if}} 
+        {{t "now to read the full story and get access to all posts for"}} 
+        {{t "paying subscribers only"}}.
+      </p>
+    {{/has}}
+    {{#has visibility="tiers"}}
+      <p class="content-cta__description">
+        {{#if @member}}{{t "Upgrade"}}{{else}}{{t "Sign up"}}{{/if}} 
+        {{t "now to read the full story and get access to all posts for"}} 
+        {{tiers}} {{t "only"}}.
+      </p>
+    {{/has}}
+
+    {{#if @member}}
+      <a href="/account/"{{#if @custom.use_portal_links}} data-portal="account"{{/if}} class="btn btn--brand m-b">
+        {{t "Account"}}
+      </a>
+    {{else}}
+      {{#if @site.members_enabled}}
+        <a href="/signup/"{{#if @custom.use_portal_links}} data-portal="signup"{{/if}} class="btn btn--brand m-b">
+          {{t "Subscribe"}}
+        </a>
+      {{/if}}
+      <div class="small">
+        <span>{{t "Already have an account?"}}</span> 
+        <a href="/signin/"{{#if @custom.use_portal_links}} data-portal="signin"{{/if}} class="content-cta-alt link-no-style">
+          {{t "Sign in"}}
+        </a>
+      </div>
+    {{/if}}
+  </div>
+</div>

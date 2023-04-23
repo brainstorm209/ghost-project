@@ -1,0 +1,56 @@
+/* Code highlighting */
+pre, code {
+  max-width: 100%;
+  margin: 0 0 var(--gap-lg);
+  font-family: var(--font-mono);
+
+  color: var(--color-text-acc);
+  background-color: var(--color-bg-acc);
+
+  font-size: var(--font-size-base);
+	text-align: left;
+	white-space: pre;
+	word-spacing: normal;
+	word-break: normal;
+	word-wrap: normal;
+	line-height: var(--line-height-base);
+  border-radius: min(5px, var(--global-radius));
+
+	-moz-tab-size: 4;
+	-o-tab-size: 4;
+	tab-size: 4;
+
+	-webkit-hyphens: none;
+	-moz-hyphens: none;
+	-ms-hyphens: none;
+	hyphens: none;
+}
+
+code {
+  position: relative;
+  font-size: 0.9rem;
+  padding: 0.1em 0.3em;
+	overflow: auto;
+  white-space: normal;
+  border: var(--border-width) solid var(--color-border);
+}
+
+/* Code blocks */
+pre {
+	padding: var(--gap);
+	overflow: auto;
+  border: var(--border-width) solid var(--color-border);
+
+  code {
+    padding: 0;
+    white-space: pre;
+    background: var(--color-transparent);
+    border: none;
+    box-shadow: none;
+    color: var(--color-text-acc);
+  }
+}
+
+.content code[class*=language-], .content pre[class*=language-] {
+  margin: 0 0 var(--gap-lg);
+}

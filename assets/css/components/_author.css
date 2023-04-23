@@ -1,0 +1,117 @@
+.author-card {
+  --color-accent: var(--color-brand);
+  display: flex;
+  flex-direction: column;
+  position: sticky;
+  top: 2rem;
+  margin-bottom: 3rem;
+  background-color: var(--color-bg-acc);
+  border-radius: var(--global-radius);
+
+  @media (--mq-md) {
+    margin-bottom: 0;
+  }
+
+  a {
+    @mixin attention { color: var(--color-accent); }
+  }
+
+  &__cover, &__profile { 
+    margin: 0; 
+
+    img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: inherit;
+    }
+  }
+
+  &__cover {
+    aspect-ratio: 16/9;
+    border-radius: inherit;
+    background-color: var(--color-accent);
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+
+    img { aspect-ratio: inherit; }
+
+    &.is-color {
+      position: relative;
+
+      &:after {
+        content: "";
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        inset: 0;
+        background: linear-gradient(135deg,hsla(0,0%,0%,.4),hsla(0,0%,100%,.2));
+        border-radius: inherit;
+      }
+    }
+  }
+
+  &__profile {
+    align-self: center;
+    width: 96px;
+    height: 96px;
+    border-radius: 50%;
+    border: 3px solid var(--color-bg-acc);
+    margin-top: -48px;
+    z-index: 2;
+    margin-bottom: var(--gap);
+    background-color: var(--color-bg-acc);
+
+    @media (--mq-md) {
+      width: 112px;
+      height: 112px;
+      margin-top: -56px;
+    }
+  }
+
+  &__content {
+    color: var(--color-text-acc);
+    padding: 1.5em;
+
+    &.has-image { padding-top: 0; }
+  }
+
+  &__name { 
+    text-align: center;
+    font-size: 1.6rem;
+
+    @media (--mq-md) {
+      font-size: 1.8rem;
+    }
+  }
+
+  &__bio {
+    margin-bottom: 1rem;
+    font-size: 0.95rem;
+    text-align: center;
+  }
+
+  &__count {
+    display: flex;
+    align-items: center;
+    font-size: 0.9rem;
+    font-weight: var(--font-weight-semi-bold);
+
+    &:after {
+      content: "—";
+      opacity: 0.25;
+      margin: 0 0.75rem;
+      font-weight: var(--font-weight-normal);
+    }
+  }
+
+  &__social {
+    display: flex;
+    align-items: center;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    gap: 5px;
+  }
+}

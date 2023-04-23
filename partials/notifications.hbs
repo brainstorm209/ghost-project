@@ -1,0 +1,88 @@
+<dialog class="notification">
+  {{> icon name="success" icon_class="notification-icon"}}
+  {{> icon name="error" icon_class="notification-icon"}}
+  {{> icon name="warning" icon_class="notification-icon"}}
+  <p class="notification-msg signup-success">{{t "Great! You’ve successfully signed up."}}</p> 
+  <p class="notification-msg signin-success">{{t "Welcome back! You've successfully signed in."}}</p> 
+  <p class="notification-msg subscribe-success">{{t "You've successfully subscribed to {sitetitle}." sitetitle=@site.title}}</p> 
+  <p class="notification-msg link-expired">{{t "Your link has expired."}}</p> 
+  <p class="notification-msg checkout-success">{{t "Success! Check your email for magic link to sign-in."}}</p> 
+  <p class="notification-msg billing-success">{{t "Success! Your billing info has been updated."}}</p> 
+  <p class="notification-msg billing-cancel">{{t "Your billing was not updated."}}</p> 
+  <button class="notification-close js-notification-close" aria-label="{{t "Close"}}" onclick="closeNotification(event.currentTarget.parentNode);">
+    {{> icon name="x"}}
+  </button>
+</dialog>
+
+{{#contentFor "scripts"}}
+  <script>
+    // Give the parameter a variable name
+    const qsParams = new URLSearchParams(window.location.search);
+    const isAction = qsParams.has('action');
+    const isStripe = qsParams.has('stripe');
+    const success = qsParams.get('success');
+    const action = qsParams.get('action');
+    const stripe = qsParams.get('stripe');
+
+    if (qsParams && isAction) {
+      if (success === "true") {
+        switch (action) {
+          case 'subscribe':
+            openNotification('subscribe-success');
+            break;
+          case 'signup': 
+            openNotification('signup-success');
+            break;
+          case 'signin':
+            openNotification('signin-success');
+            break;
+          default:
+            break;
+        }
+      } else {
+        openNotification('link-expired');
+      }
+    }
+
+    if (qsParams && isStripe) {
+      switch (stripe) {
+        case 'success':
+          openNotification('checkout-success');
+          break;
+        case 'billing-update-success':
+          openNotification('billing-success');
+          break;
+        case 'billing-update-cancel':
+          openNotification('billing-cancel');
+          break;
+        default:
+          break;
+      }
+    }
+
+    /**
+    * Handle Notifications
+    */
+    function openNotification(type) {
+      const notification = document.querySelector('dialog.notification');
+      if (notification) { 
+        notification.setAttribute('data-msg-type', type);
+        notification.show();
+        setTimeout(function(){ closeNotification(notification); }, 3000);
+      }
+    }
+    
+    /**
+    * Clean URI
+    */
+    function clearURI() {
+      window.history.replaceState({}, '', `${window.location.pathname}`);
+    }
+
+    function closeNotification(notification) {
+      notification.close();
+      clearURI();
+      setTimeout(function(){ notification.removeAttribute('data-msg-type') }, 500);
+    }
+  </script>
+{{/contentFor}}

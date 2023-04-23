@@ -1,0 +1,11 @@
+@define-mixin darktheme {
+  @media (prefers-color-scheme: dark) {
+    html[data-color-scheme="system"] {
+      @mixin-content;
+    }
+  }
+
+  html[data-color-scheme="dark"] {
+    @mixin-content;
+  }
+}

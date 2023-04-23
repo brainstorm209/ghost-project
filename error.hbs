@@ -1,0 +1,20 @@
+{{!< default}}
+
+<div class="container wrapper">
+  {{!-- Error page --}}
+  <div class="err flex flex-cc flex-col m-b-xl">
+    <div class="err__content">
+      <h1 class="m-b-sm">{{statusCode}}</h1>
+      <p class="err__description text-11 opacity-080 text-acc-3 text-center">
+        {{message}}
+      </p>
+
+      {{!-- Links to home and contact page --}}
+      <div class="err__links flex flex-cc">
+        {{#link href="javascript:history.back()" class="btn btn--bordered m-r"}}{{t "Back"}}{{/link}}
+        {{#link href=@site.url class="btn btn--bordered m-r"}}{{t "Home"}}{{/link}}
+      </div>
+    </div>
+    <svg id="visual" viewBox="0 0 960 540" width="960" height="540" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1"><g transform="translate(464.05596541078967 261.462605901969)"><path d="M109 -161.3C157.2 -138.7 223.3 -135.4 262.5 -103.9C301.7 -72.4 314.2 -12.7 308.5 46.1C302.8 105 278.9 163 235.8 193.6C192.6 224.1 130.1 227.2 74.2 236.1C18.2 245 -31.2 259.7 -72.2 247.1C-113.2 234.5 -145.8 194.5 -180.3 155.7C-214.9 116.8 -251.5 79.1 -268 32.3C-284.5 -14.6 -281 -70.7 -253.1 -108.8C-225.1 -147 -172.9 -167.3 -126.6 -190.8C-80.4 -214.4 -40.2 -241.2 -4.9 -233.6C30.4 -226 60.8 -184 109 -161.3" fill="var(--color-bg-acc)"></path></g></svg>
+  </div>
+</div>

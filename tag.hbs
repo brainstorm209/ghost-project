@@ -1,0 +1,58 @@
+{{!< default}}
+
+<div class="container wrapper">
+  <div class="row m-t">
+    <div class="col-xs-12 col-md-6 col-lg-5 col-xl-4">
+      {{!-- Tag Hero --}}
+      {{#tag}}
+        <div class="tag-card is-tag {{#if feature_image}}has-img{{/if}}"{{#if accent_color}} style="--color-accent: {{accent_color}}"{{/if}}>
+          {{!-- Tag image --}}
+          {{#if feature_image}}
+            <figure class="tag-card__media">
+              {{> image
+                image_type="tag"
+                image_class="lazyload tag-card__img"
+                image_url=feature_image
+                size_xs=true
+                size_s=true
+                size_m=true
+              }}
+            </figure>
+          {{/if}}
+        </div>
+      {{/tag}}
+    </div>
+    <div class="col-xs-12 col-md-6 col-lg-7 col-xl-8">
+      {{#tag}}
+        <div class="tag-info">
+          <h1 class="tag-name">{{name}}</h1>
+
+          <p class="tag-description">
+            <span class="tag-count">
+              {{> icon name="chart" size="sm" icon_class="m-r-sm"}}
+              {{#plural ../pagination.total empty=(t 'No posts') singular=(t '1 post') plural=(t '% posts')}}{{/plural}}
+            </span>
+            {{#if description}}<span class="m-l-sm m-r-sm">—</span>{{/if}}
+            {{#if description}}{{description}}{{/if}}
+          </p>
+        </div>
+      {{/tag}}
+
+      {{!-- The Posts --}}
+      {{#if posts}}
+        <div class="post-list js-post-feed">
+          {{#foreach posts}}
+            <a class="post-list-item" href="{{url}}">
+              <h2 class="post-list-item__title">{{title}}</h2>
+              {{> icon name="chevron-right"}}
+            </a>
+          {{/foreach}}
+        </div>
+      {{/if}}
+    </div>
+  </div>
+  
+  {{!-- Pagination --}}
+  {{pagination}}
+  
+</div>

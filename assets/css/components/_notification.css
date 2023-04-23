@@ -1,0 +1,105 @@
+.notification {    
+  display: flex;
+  align-items: center;    
+  justify-content: flex-end;
+  position: fixed;
+  z-index: 100;
+  left: auto;
+  top: var(--gap);
+  right: var(--gap);  
+  margin: 0; 
+  padding: var(--gap); 
+  width: 100%;
+  max-width: calc(100% - 2em);
+  background-color: hsla(var(--color-bg-base-reverse)/80%);
+  color: var(--color-text-reverse);
+  border-radius: var(--global-radius);
+  visibility: hidden;
+  opacity: 0;
+  backdrop-filter: blur(5px);
+  transform: translateX(100%);
+  transition: all var(--transition-default);
+
+  &[data-msg-type="signup-success"] .signup-success,
+  &[data-msg-type="signup-success"] .icon-success,
+  &[data-msg-type="signin-success"] .signin-success, 
+  &[data-msg-type="signin-success"] .icon-success,
+  &[data-msg-type="subscribe-success"] .subscribe-success, 
+  &[data-msg-type="subscribe-success"] .icon-success,
+  &[data-msg-type="link-expired"] .link-expired, 
+  &[data-msg-type="link-expired"] .icon-error,
+  &[data-msg-type="checkout-success"] .checkout-success, 
+  &[data-msg-type="checkout-success"] .icon-success,
+  &[data-msg-type="billing-success"] .billing-success, 
+  &[data-msg-type="billing-success"] .icon-success,
+  &[data-msg-type="billing-cancel"] .billing-cancel, 
+  &[data-msg-type="billing-cancel"] .icon-warning {
+    display: block;
+  }
+
+  &[open] { 
+    display: flex; 
+    opacity: 1;
+    visibility: var(--global-theme-notifications);
+    transform: translateX(0);
+  }
+
+  @media (--mq-sm) {
+    max-width: 25rem;
+  }
+
+  @mixin attention {
+    outline: none;
+  }
+
+  &-icon {
+    display: none;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    margin-right: var(--gap);
+    stroke-width: 1.75px;
+
+    &.icon-success {
+      color: var(--color-success);
+    }
+
+    &.icon-warning {
+      color: var(--color-warning);
+    }
+
+    &.icon-error {
+      color: var(--color-error);
+    }
+  }
+
+  &-msg {
+    font-size: 0.9rem;
+    font-weight: var(--font-weight-semi-bold);
+    display: none;
+    flex: 1;
+    margin: 0;
+    margin-right: var(--gap);
+    line-height: 1.4;
+  }
+
+  &-close {
+    padding: 0;
+    position: relative;
+    width: 30px;
+    height: 30px;
+    background-color: var(--color-transparent);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    align-self: flex-start;
+
+    .icon { transition: all var(--transition-default); }
+
+    @mixin attention {
+      background-color: hsla(var(--color-bg-base) / 10%);
+      .icon { transform: rotate(45deg); }
+    }
+  }
+}

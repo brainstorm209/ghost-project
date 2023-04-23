@@ -1,0 +1,54 @@
+{{!< default}}
+
+{{!-- Everything inside the #post tags pulls data from the post --}}
+{{#post}}
+
+  <div class="container wrapper m-0-auto">
+    {{!-- Hero --}}
+    {{> post-hero 
+      image_style="max-width"
+    }}
+
+    <div class="row m-b-lg">
+      {{!-- Fixed TOC --}}
+      <div class="col-xs-12 col-lg-3">
+        {{> toc sidebar=true}}
+      </div>
+
+      {{!-- Post content --}}
+      <div class="col-xs-12 col-lg-6">
+
+        <article class="{{post_class}} content post-access-{{visibility}} no-overflow">
+          {{content}}
+        </article>
+
+         {{!-- Social share & tags --}}
+        {{#is "post"}}
+          {{!-- Tags --}}
+          {{> post-tags}}
+
+          {{#if access}}
+            {{> social-share class="m-b-lg"}}
+          {{/if}}
+        {{/is}}
+      </div>
+
+      {{!-- Sidebar --}}
+      <div class="col-xs-12 col-lg-3">
+        {{> sidebar}}
+      </div>
+    </div>
+
+    {{!-- Comments & Related --}}
+    {{#is "post"}}
+      <div class="flex flex-wrap gap-lg m-b-lg">
+        {{!-- Comments --}}
+        {{> comments}}
+
+        {{!-- Related posts --}}
+        {{> related}}
+      </div>
+    {{/is}}
+  </div>
+
+{{/post}}

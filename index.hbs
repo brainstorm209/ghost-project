@@ -1,0 +1,183 @@
+<style>
+  #resources {
+    display: flex;
+  }
+
+  #resources .tags {
+    width: 250px;
+    padding-right: 1em;
+    align-self: flex-start;
+    position: sticky;
+    top: 1em;
+  }
+
+  #resources .resources {
+    flex-grow: 1;
+  }
+
+  .resourcetag {
+    width: 170px;
+    border: 1px solid #fffcfcb0;
+    display: flex;
+    justify-content: space-between;
+    border-radius: 5px;
+    text-align: left;
+    margin-left: -30px;
+    padding: 8px;
+
+  }
+
+  .listtag {
+    margin-left: -30px;
+    align-items: center;
+    justify-content: space-between;
+    display: flex;
+    padding-top: 5px;
+    font-size: .95rem;
+    border-radius: 5px;
+    padding: 5px;
+    margin-top: 4px;
+    margin-bottom: 4px;
+    font-weight: bold;
+    cursor: pointer;
+    border: 1px solid transparent;
+    height: 40px;
+  }
+
+  .listtag:hover {
+    background: #151515;
+  }
+
+  .listtag.active {
+    border: 1px solid #d9d9d9;
+    background: transparent;
+  }
+
+  .listtag .item {
+    display: flex;
+    align-items: center;
+  }
+
+  .listtag .item img {
+    margin-right: 10px;
+  }
+
+  .listtag .num {
+    display: none;
+  }
+
+
+  .listtag.active .num {
+    display: block;
+  }
+</style>
+
+{{!< default}} {{!-- Home hero --}} {{#is "home" }} {{>hero}}
+  {{/is}}
+
+  {{!-- Everything in a container --}}
+  <div class="container wrapper">
+    <section class="section section-resources" id="resources">
+      <ul class="tags">
+        <li class="listtag"  onload="tagClick(this)" onclick="tagClick(this)">
+          <a href="#">All resources</a>
+          <span class="num">{{posts.length}}</span>
+        </li>
+        {{#get "tags" include="count.posts"}}
+        {{#foreach tags}}
+          {{#match name "!=" "Article"}}
+            <li class="listtag" onclick='tagClick(this, "{{name}}")'>
+              <div class="item">
+                <img src="{{feature_image}}" style="" />
+                <a href="#{{slug}}">{{name}}</a>
+              </div>
+              <span class="num">{{count.posts}}</span>
+            </li>
+          {{/match}}        
+
+        {{/foreach}}
+        {{/get}}
+      </ul>
+      <div class="resources" data-filter-position="{{@custom.resources_filter_position}}" data-category="all"
+        data-filter-count="{{#get " tags" filter="slug:[{{@custom.resources_filter_slugs}}]"
+        }}{{tags.length}}{{else}}0{{/get}}">
+        {{#match @custom.resources_filter_position "!=" "hidden"}}
+        {{> resources-filter}}
+        {{/match}}
+        <div class="resources-feed js-resources-feed" data-feed-layout="{{@custom.resources_feed_layout}}"
+          data-not-found="{{t " No resources found"}}">
+          {{#foreach posts}}
+          {{> resource-card}}
+          {{/foreach}}
+        </div>
+      </div>
+
+      {{!-- Pagination --}}
+      {{> pagination type="load-more"}}
+    </section>
+
+    {{!-- Blog section - rendered if the /blog/ page has the tag #home-blog --}}
+    {{#get "posts" filter="tag:hash-blog" include="tags,authors,tiers" limit="3"}}
+    {{#if posts}}
+    <section class="section section-blog flex flex-wrap">
+      <h2 class="section-title m-b-0">{{t "Blog"}}</h2>
+      {{#link href="/blog/" class="btn--view m-l-sm"}}
+      <span class="m-r-sm">{{t "View all"}}</span>
+      {{> icon name="arrow-right" size="14"}}
+      {{/link}}
+      <div class="grid post-feed m-t m-b-lg">
+        {{#foreach posts}}
+        {{> post-card}}
+        {{/foreach}}
+      </div>
+    </section>
+    {{/if}}
+    {{/get}}
+
+  </div>
+  <script type="text/javascript" src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.7.1.min.js"></script>
+  <script type="text/javascript">
+
+
+    function tagClick(obj, tagName) {
+      $('.listtag.active').removeClass('active');
+      $(obj).addClass('active');
+      $('.resource-card').show();
+      $(".resource-card").each(function () {
+        console.log($(this));
+      });
+      if (tagName) {
+        $('.resource-card').each(function () {
+          let tags = [];
+          $('.resource-card__tags span', $(this)).each(function () {
+            tags.push($(this).html());
+          });
+          if (tags.indexOf(tagName) < 0) {
+            $(this).hide();
+          }
+        });
+      } else {
+        $('.resource-card').each(function () {
+          let tags = [];
+          $('.resource-card__tags span', $(this)).each(function () {
+            tags.push($(this).html());
+          });
+          if (tags.indexOf('Article') >= 0) {
+            $(this).hide();
+          }
+        }); 
+      }
+    }
+    $(document).ready(function() {
+        $('.resource-card').each(function () {
+          let tags = [];
+          $('.resource-card__tags span', $(this)).each(function () {
+            tags.push($(this).html());
+          });
+          if (tags.indexOf('Article') >= 0) {
+            $(this).hide();
+          }
+        }); 
+    })   
+
+  </script>

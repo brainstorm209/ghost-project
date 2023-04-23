@@ -1,0 +1,107 @@
+{{!< default}}
+
+<div class="container wrapper">
+  <div class="row m-t">
+    <div class="col-xs-12 col-md-6 col-lg-5 col-xl-4">
+      {{!-- Author Hero --}}
+      {{#author}}
+        <div class="author-card author-{{slug}}{{#if class}} {{class}}{{/if}}">
+          {{!-- Author cover image --}}
+          <figure class="author-card__cover{{#unless cover_image}} is-color{{/unless}}">
+            {{#if cover_image}}
+              {{> image
+                image_type="author"
+                image_class="lazyload author-card__img"
+                image_url=cover_image
+                size_xs=true
+                size_s=true
+                size_m=true
+              }}
+            {{/if}}
+          </figure>
+          
+          {{!-- Author profile image --}}
+          {{#if profile_image}}
+            <figure class="author-card__profile">
+              {{> image
+                image_type="author"
+                image_class="lazyload author-card__img"
+                image_url=profile_image
+                size_xs=true
+                size_s=true
+              }}
+            </figure>
+          {{/if}}
+
+          {{!-- Author hero content --}}
+          <div class="author-card__content{{#if profile_image}} has-image{{/if}}">
+            {{!-- Name --}}
+            <h1 class="author-card__name">{{name}}</h1>
+            
+            {{#if bio}}<p class="author-card__bio">{{bio}}</p>{{/if}}
+            
+            {{!-- Post count & social --}}
+            <div class="author-card__info flex flex-cc">
+              <span class="author-card__count">
+                {{> icon name="chart" size="sm" icon_class="m-r-xs"}}
+                {{plural ../pagination.total empty=(t 'No posts') singular=(t '1 post') plural=(t '% posts')}}
+              </span>
+
+              <ul class="author-card__social {{#if twitter}} has-twitter{{/if}}{{#if facebook}} has-facebook{{/if}}{{#if website}} has-website{{/if}}">
+                {{!-- Twitter --}}
+                {{#if twitter}}
+                  <li>
+                    <a href="{{twitter_url}}" class=""
+                      title="Twitter" aria-label="Twitter"
+                      target="_blank" rel="noopener noreferrer">
+                      {{> icon name="twitter" size="sm"}}
+                    </a>
+                  </li>
+                {{/if}}
+                {{!-- Facebook --}}
+                {{#if facebook}}
+                  <li>
+                    <a href="{{facebook_url}}" class=""
+                      title="Facebook" aria-label="Facebook"
+                      target="_blank" rel="noopener noreferrer">
+                      {{> icon name="facebook" size="sm"}}
+                    </a>
+                  </li>
+                {{/if}}
+                {{!-- Author website --}}
+                {{#if website}}
+                  <li>
+                    <a href="{{website}}" class=""
+                      title="Website" aria-label="Website"
+                      target="_blank" rel="noopener noreferrer">
+                      {{> icon name="link" size="sm"}}
+                    </a>
+                  </li>
+                {{/if}}
+              </ul>
+            </div>
+          </div>
+        </div>
+      {{/author}}
+    </div>
+
+
+    <div class="col-xs-12 col-md-6 col-lg-7 col-xl-8">
+       {{!-- The Posts --}}
+      {{#if posts}}
+        <div class="post-list js-post-feed">
+          {{#foreach posts}}
+            <a class="post-list-item" href="{{url}}">
+              <h2 class="post-list-item__title">{{title}}</h2>
+              {{> icon name="chevron-right"}}
+            </a>
+          {{/foreach}}
+        </div>
+      {{/if}}
+    </div>
+  </div>
+
+  {{!-- Pagination --}}
+  {{pagination}}
+
+</div>
