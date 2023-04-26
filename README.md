@@ -1,6 +1,10 @@
+# Description
+
+This website uses rinne theme. This example repo can be used for third party platform service. You can check the example site I've designed and built in Ghost with this link. https://centrai.io
+It is very easy to use from beginner to expert. Thanks.
 # rinne
 
-A Ghost CMS theme.
+A Ghost CMS theme. 
 
 
 ## Requirements
@@ -63,3 +67,4 @@ Runs a series of tasks necessary for local development/customizing.
 ## Help
 
 [https://bironthemes.com/contact/](https://bironthemes.com/contact/)
+
